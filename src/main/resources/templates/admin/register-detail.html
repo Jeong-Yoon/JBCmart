@@ -1,10 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>productDetailform1</title>
+
+    <script src="/js/jquery-1.3.2.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $("#DoIt").click(function() {
+                var size = $("input[name=size]:checked");
+                var color = $("input[name=color]:checked");
+                var sizeresult = "";
+                var colorresult = "";
+                for (var i = 0; i < size.length; i++) {
+                    sizeresult = $(size[i]).val();
+                    var option = $("<option>"+sizeresult+"</option>");
+                    $('#size_sel').append(option);
+                }
+
+                for (var i = 0; i < color.length; i++) {
+                    colorresult = $(color[i]).val();
+                    var option = $("<option>"+colorresult+"</option>");
+                    $('#color_sel').append(option);
+
+                }
+
+                $("#result1").text(sizeresult);
+                $("#result2").text(colorresult);
+            });
+        });
+    </script>
+
+
 </head>
 <body>
-$END$
+<h1>productDetailform1</h1>
+
+<form onclick='javascript()' value='등록'>
+
+
+    <li><input id="size1" type="checkbox" name="size" value="230" /><label for="size1">230</label></li>
+    <li><input id="size2" type="checkbox" name="size" value="240" /><label for="size2">240</label></li>
+    <li><input id="size3" type="checkbox" name="size" value="250" /><label for="size3">250</label></li>
+    <li><input id="size4" type="checkbox" name="size" value="260" /><label for="size4">260</label></li>
+    <br><br>
+
+    <li><input type="checkbox" name="color" value="red" /><label>red</label></li>
+    <li><input type="checkbox" name="color" value="black" /><label>black</label></li>
+    <li><input type="checkbox" name="color" value="white" /><label>white</label></li>
+
+
+
+
+    <input id="DoIt" type="button" value="선택"/>
+</form>
+
+
+<form method="post" action="/admin/register-detail" >
+
+    <input type="hidden" th:value="${product.productId}" name = "productId" id="productId">
+    product name : <li th:text="${product.productName}"></li>
+
+    <br>
+
+    <select id="size_sel"  style="width:100px" name="size"></select>
+    <select id="color_sel" style="width:100px" name="color"></select>
+    <input  type="number" name="quantity" min="1" max="100"/>
+
+    <input
+            type="hidden"
+            th:name="${_csrf.parameterName}"
+            th:value="${_csrf.token}" />
+
+    <input type="submit" value="등록">
+
+</form>
+
 </body>
 </html>

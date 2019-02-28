@@ -1,4 +1,4 @@
-package my.examples.bootexam.domain;
+package my.examples.JBCmart.domain;
 
 import lombok.Getter;
 import lombok.Setter;

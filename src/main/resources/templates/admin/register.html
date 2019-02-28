@@ -1,10 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>register</title>
 </head>
 <body>
-$END$
+<form method="post" action="/admin/register" enctype="multipart/form-data">
+    product ID : <input type="text" name="id"><br>
+    product name : <input type="text" name="name"><br>
+    price : <input type="text" name="price"><br>
+    category : <select name="categoryId">
+    <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+    </select><br>
+    image1 : <input type="file" name="image"><br>
+    image2 : <input type="file" name="image"><br>
+
+
+    <input
+            type="hidden"
+            th:name="${_csrf.parameterName}"
+            th:value="${_csrf.token}"/>
+    <input type="submit" value="register">
+</form>
 </body>
 </html>
